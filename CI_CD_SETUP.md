@@ -18,12 +18,11 @@ Workflow tự động chạy khi:
 1. **Checkout code** - Tải source code và submodules
 2. **Setup JDK 17** - Cài đặt Java Development Kit
 3. **Setup Android SDK** - Cài đặt Android SDK và build tools
-4. **Download Gradle Wrapper** - Tải Gradle wrapper jar
-5. **Initialize submodules** - Khởi tạo opensdk submodule
-6. **Build Debug APK** - Build APK debug (không cần ký)
-7. **Build Release APK** - Build APK release (có thể ký hoặc không)
-8. **Upload Artifacts** - Upload APK files để download
-9. **Create Release** - Tạo GitHub Release với APK files (chỉ trên main/master)
+4. **Initialize submodules** - Khởi tạo opensdk submodule
+5. **Build Debug APK** - Build APK debug (không cần ký)
+6. **Build Release APK** - Build APK release (có thể ký hoặc không)
+7. **Upload Artifacts** - Upload APK files để download
+8. **Create Release** - Tạo GitHub Release với APK files (chỉ trên main/master)
 
 ## 📦 Output - Kết quả nhận được
 

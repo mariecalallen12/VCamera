@@ -90,6 +90,6 @@ lint/tmp/
 # mac
 *.DS_Store
 
-gradle
+# Gradle properties (but keep wrapper files)
 gradle.properties
 local.properties

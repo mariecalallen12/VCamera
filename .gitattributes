@@ -1,0 +1,19 @@
+# Gradle wrapper
+gradle-wrapper.jar binary
+*.jar binary
+
+# Line endings
+*.java text eol=lf
+*.kt text eol=lf
+*.xml text eol=lf
+*.properties text eol=lf
+*.gradle text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+
+# Windows scripts
+*.bat text eol=crlf
+
+# Unix scripts  
+*.sh text eol=lf
+gradlew text eol=lf

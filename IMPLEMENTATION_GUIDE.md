@@ -118,6 +118,7 @@ import android.content.Context
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -425,9 +426,11 @@ import java.util.concurrent.TimeUnit
 
 object SecureHttpClient {
     
-    // Thay đổi domain và hash theo API của bạn
-    private const val API_DOMAIN = "api.vcamera.app"
-    private const val CERTIFICATE_HASH = "sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+    // ⚠️ PLACEHOLDER: Thay đổi domain và hash theo API thực tế của bạn
+    // Để lấy certificate hash, sử dụng:
+    // openssl s_client -connect api.yourserver.com:443 | openssl x509 -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
+    private const val API_DOMAIN = "api.vcamera.app"  // TODO: Thay bằng domain thực
+    private const val CERTIFICATE_HASH = "sha256/PLACEHOLDER_REPLACE_WITH_ACTUAL_HASH="  // TODO: Thay bằng hash thực
     
     fun create(): OkHttpClient {
         val certificatePinner = CertificatePinner.Builder()

@@ -14,6 +14,22 @@ android {
         versionName rootProject.ext.versionName
     }
 
+    signingConfigs {
+        release {
+            // For CI/CD: Read signing config from environment variables or properties
+            if (project.hasProperty('KEYSTORE_PASSWORD')) {
+                storeFile file('release-keystore.jks')
+                storePassword project.property('KEYSTORE_PASSWORD')
+                keyAlias project.property('KEY_ALIAS')
+                keyPassword project.property('KEY_PASSWORD')
+            } else if (System.getenv('KEYSTORE_PASSWORD') != null) {
+                storeFile file('release-keystore.jks')
+                storePassword System.getenv('KEYSTORE_PASSWORD')
+                keyAlias System.getenv('KEY_ALIAS')
+                keyPassword System.getenv('KEY_PASSWORD')
+            }
+        }
+    }
 
     buildTypes {
         debug {
@@ -24,6 +40,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (signingConfigs.release.storeFile != null && signingConfigs.release.storeFile.exists()) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 

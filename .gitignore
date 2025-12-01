@@ -91,5 +91,5 @@ lint/tmp/
 *.DS_Store
 
 # Gradle properties (but keep wrapper files)
-gradle.properties
+# gradle.properties - Commented out to allow AndroidX configuration
 local.properties

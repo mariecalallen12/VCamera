@@ -50,14 +50,10 @@ public class FloatingMagnetView extends FrameLayout {
     private void init(Context context) {
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         
-        // Get screen dimensions
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        if (wm != null) {
-            android.util.DisplayMetrics metrics = new android.util.DisplayMetrics();
-            wm.getDefaultDisplay().getMetrics(metrics);
-            screenWidth = metrics.widthPixels;
-            screenHeight = metrics.heightPixels;
-        }
+        // Get screen dimensions using system resources for better compatibility
+        android.util.DisplayMetrics metrics = context.getResources().getSystem().getDisplayMetrics();
+        screenWidth = metrics.widthPixels;
+        screenHeight = metrics.heightPixels;
     }
     
     @Override
@@ -118,6 +114,11 @@ public class FloatingMagnetView extends FrameLayout {
      * Animate the view to the nearest screen edge
      */
     private void animateToNearestEdge() {
+        // Check if view has been laid out
+        if (getWidth() <= 0 || getHeight() <= 0) {
+            return; // Skip animation if view dimensions are not available yet
+        }
+        
         float currentX = getX();
         float currentY = getY();
         

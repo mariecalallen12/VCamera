@@ -50,8 +50,8 @@ public class FloatingMagnetView extends FrameLayout {
     private void init(Context context) {
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         
-        // Get screen dimensions using system resources for better compatibility
-        android.util.DisplayMetrics metrics = context.getResources().getSystem().getDisplayMetrics();
+        // Get screen dimensions using context resources for accurate display metrics
+        android.util.DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         screenWidth = metrics.widthPixels;
         screenHeight = metrics.heightPixels;
     }

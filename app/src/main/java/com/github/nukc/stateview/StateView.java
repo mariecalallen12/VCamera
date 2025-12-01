@@ -21,7 +21,6 @@ public class StateView extends FrameLayout {
     private View loadingView;
     private View emptyView;
     private View errorView;
-    private View contentView;
     private View currentStateView;
     
     private int loadingLayoutId = 0;

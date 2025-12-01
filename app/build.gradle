@@ -53,18 +53,15 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    dexOptions {
-        preDexLibraries false
-        maxProcessCount 8
-        javaMaxHeapSize "4g"
-    }
+    // dexOptions is obsolete and has been removed
+    // The Android Gradle plugin now optimizes dexing automatically
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     aaptOptions {
         cruncherEnabled = false
-        useNewCruncher = false
+        // useNewCruncher has been deprecated - new cruncher is now always enabled
     }
     testOptions {
         unitTests.returnDefaultValues = true
@@ -76,7 +73,8 @@ android {
         disable "UnusedResources", 'RestrictedApi'
         textOutput "stdout"
         textReport false
-        check 'NewApi', 'InlinedApi'
+        // 'check' has been renamed to 'checkOnly' to make it clear it turns off all other checks
+        checkOnly 'NewApi', 'InlinedApi'
     }
 }
 

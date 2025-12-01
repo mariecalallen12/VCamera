@@ -163,9 +163,9 @@ class EnFloatView(mContext: Context) : FloatingMagnetView(mContext) {
 
 ## 🔧 Các Thay Đổi Trong build.gradle
 
-**File:** `app/build.gradle`
+### File: app/build.gradle
 
-**Trước đây:**
+**1. Dependencies - Trước đây:**
 ```gradle
 implementation 'com.github.nukc.stateview:kotlin:2.2.0'
 implementation 'com.roger.catloadinglibrary:catloadinglibrary:1.0.9'
@@ -180,10 +180,55 @@ implementation 'com.imuxuan:floatingview:1.6'
 // implementation 'com.imuxuan:floatingview:1.6'
 ```
 
-**Giải thích:**
-- Comment out 3 dependencies không khả dụng
-- Thêm comment giải thích rằng đã thay thế bằng local implementations
-- Các dependency khác giữ nguyên
+**2. Loại Bỏ Các Deprecations:**
+
+**dexOptions (đã obsolete):**
+```gradle
+// Đã loại bỏ:
+// dexOptions {
+//     preDexLibraries false
+//     maxProcessCount 8
+//     javaMaxHeapSize "4g"
+// }
+```
+- DSL element `dexOptions` đã bị loại bỏ trong AGP 8.0
+- Android Gradle Plugin tự động tối ưu dexing
+
+**useNewCruncher (đã deprecated):**
+```gradle
+aaptOptions {
+    cruncherEnabled = false
+    // useNewCruncher has been deprecated - new cruncher is now always enabled
+}
+```
+- useNewCruncher đã bị deprecated
+- New cruncher hiện được bật mặc định
+
+**lintOptions.check → lintOptions.checkOnly:**
+```gradle
+lintOptions {
+    // Đổi từ 'check' sang 'checkOnly'
+    checkOnly 'NewApi', 'InlinedApi'
+}
+```
+- `check` đã đổi thành `checkOnly` để rõ ràng hơn
+- `checkOnly` sẽ tắt tất cả checks khác ngoài các checks được liệt kê
+
+### File: opensdk/build.gradle
+
+**lintOptions.check → lintOptions.checkOnly:**
+```gradle
+lintOptions {
+    // Đổi từ 'check' sang 'checkOnly'
+    checkOnly 'NewApi', 'InlinedApi'
+}
+```
+
+**Lợi ích của các thay đổi:**
+- ✅ Loại bỏ tất cả các deprecation warnings
+- ✅ Tương thích với Android Gradle Plugin 7.2.0
+- ✅ Chuẩn bị sẵn sàng cho AGP 8.0+
+- ✅ Build log sạch hơn, dễ đọc hơn
 
 ---
 
@@ -210,13 +255,33 @@ implementation 'com.imuxuan:floatingview:1.6'
    - Location: `app/src/main/res/layout/`
    - Purpose: Layout cho loading dialog
 
-### Files Đã Chỉnh Sửa (1 file)
+### Files Đã Chỉnh Sửa (2 files)
 
 1. **app/build.gradle**
    - Comment out 3 dependencies không khả dụng
    - Thêm comment giải thích
+   - Loại bỏ dexOptions (đã obsolete trong AGP 7.2.0)
+   - Loại bỏ useNewCruncher (đã deprecated)
+   - Đổi `check` thành `checkOnly` trong lintOptions
+
+2. **opensdk/build.gradle**
+   - Đổi `check` thành `checkOnly` trong lintOptions
 
 ### Tổng Số Dòng Code Mới: 459 dòng
+
+### Các Cảnh Báo Deprecation Đã Khắc Phục
+
+✅ **WARNING: DSL element 'dexOptions' is obsolete**
+- Đã loại bỏ hoàn toàn dexOptions block
+- Android Gradle Plugin tự động tối ưu dexing
+
+✅ **WARNING: useNewCruncher has been deprecated**
+- Đã loại bỏ useNewCruncher setting
+- New cruncher luôn được bật mặc định
+
+✅ **WARNING: DSL element 'android.lintOptions.check' is obsolete**
+- Đã đổi `check` thành `checkOnly` trong cả app và opensdk modules
+- Rõ ràng hơn về việc tắt các checks khác
 
 ---
 

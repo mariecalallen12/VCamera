@@ -69,18 +69,7 @@ public class StateView extends FrameLayout {
      */
     public void showLoading() {
         currentState = STATE_LOADING;
-        setVisibility(VISIBLE);
-        hideAllStates();
-        
-        if (loadingView == null && loadingLayoutId != 0) {
-            loadingView = LayoutInflater.from(getContext()).inflate(loadingLayoutId, this, false);
-            addView(loadingView);
-        }
-        
-        if (loadingView != null) {
-            loadingView.setVisibility(VISIBLE);
-            currentStateView = loadingView;
-        }
+        showStateView(loadingView, loadingLayoutId);
     }
     
     /**
@@ -88,18 +77,7 @@ public class StateView extends FrameLayout {
      */
     public void showEmpty() {
         currentState = STATE_EMPTY;
-        setVisibility(VISIBLE);
-        hideAllStates();
-        
-        if (emptyView == null && emptyLayoutId != 0) {
-            emptyView = LayoutInflater.from(getContext()).inflate(emptyLayoutId, this, false);
-            addView(emptyView);
-        }
-        
-        if (emptyView != null) {
-            emptyView.setVisibility(VISIBLE);
-            currentStateView = emptyView;
-        }
+        showStateView(emptyView, emptyLayoutId);
     }
     
     /**
@@ -107,17 +85,35 @@ public class StateView extends FrameLayout {
      */
     public void showError() {
         currentState = STATE_ERROR;
+        showStateView(errorView, errorLayoutId);
+    }
+    
+    /**
+     * Helper method to show a state view
+     */
+    private void showStateView(View view, int layoutId) {
         setVisibility(VISIBLE);
         hideAllStates();
         
-        if (errorView == null && errorLayoutId != 0) {
-            errorView = LayoutInflater.from(getContext()).inflate(errorLayoutId, this, false);
-            addView(errorView);
+        // Inflate view if needed
+        if (view == null && layoutId != 0) {
+            view = LayoutInflater.from(getContext()).inflate(layoutId, this, false);
+            addView(view);
+            
+            // Update the corresponding state view reference
+            if (currentState == STATE_LOADING) {
+                loadingView = view;
+            } else if (currentState == STATE_EMPTY) {
+                emptyView = view;
+            } else if (currentState == STATE_ERROR) {
+                errorView = view;
+            }
         }
         
-        if (errorView != null) {
-            errorView.setVisibility(VISIBLE);
-            currentStateView = errorView;
+        // Show the view
+        if (view != null) {
+            view.setVisibility(VISIBLE);
+            currentStateView = view;
         }
     }
     

@@ -44,9 +44,16 @@ public class CatLoadingView extends DialogFragment {
         // Create a simple loading view
         View view = inflater.inflate(R.layout.dialog_loading, container, false);
         
-        // Apply background color if set
-        if (backgroundColor != Color.TRANSPARENT) {
-            view.setBackgroundColor(backgroundColor);
+        // Apply background color if set (accepts color resource ID)
+        if (backgroundColor != Color.TRANSPARENT && getContext() != null) {
+            try {
+                // Try to resolve as color resource ID first
+                int color = androidx.core.content.ContextCompat.getColor(getContext(), backgroundColor);
+                view.setBackgroundColor(color);
+            } catch (Exception e) {
+                // If not a valid resource ID, treat as direct color value
+                view.setBackgroundColor(backgroundColor);
+            }
         }
         
         return view;
@@ -76,6 +83,7 @@ public class CatLoadingView extends DialogFragment {
      * @param colorRes Color resource ID
      */
     public void setBackgroundColor(int colorRes) {
+        // Accept color resource ID and store it for use in onCreateView
         this.backgroundColor = colorRes;
     }
     

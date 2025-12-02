@@ -53,18 +53,15 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    dexOptions {
-        preDexLibraries false
-        maxProcessCount 8
-        javaMaxHeapSize "4g"
-    }
+    // dexOptions is obsolete and has been removed
+    // The Android Gradle plugin now optimizes dexing automatically
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     aaptOptions {
         cruncherEnabled = false
-        useNewCruncher = false
+        // useNewCruncher has been deprecated - new cruncher is now always enabled
     }
     testOptions {
         unitTests.returnDefaultValues = true
@@ -76,7 +73,8 @@ android {
         disable "UnusedResources", 'RestrictedApi'
         textOutput "stdout"
         textReport false
-        check 'NewApi', 'InlinedApi'
+        // 'check' has been renamed to 'checkOnly' to make it clear it turns off all other checks
+        checkOnly 'NewApi', 'InlinedApi'
     }
 }
 
@@ -141,13 +139,14 @@ dependencies {
     implementation 'com.tbuonomo:dotsindicator:4.2'
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
     implementation 'com.afollestad.material-dialogs:input:3.3.0'
-    implementation 'com.github.nukc.stateview:kotlin:2.2.0'
-    implementation 'com.roger.catloadinglibrary:catloadinglibrary:1.0.9'
+    // Replaced with local stub implementations in app/src/main/java/
+    // implementation 'com.github.nukc.stateview:kotlin:2.2.0'
+    // implementation 'com.roger.catloadinglibrary:catloadinglibrary:1.0.9'
+    // implementation 'com.imuxuan:floatingview:1.6'
     implementation 'com.github.Ferfalk:SimpleSearchView:0.2.0'
     implementation 'com.github.Othershe:CornerLabelView:1.0.0'
     implementation 'org.osmdroid:osmdroid-android:6.1.11'
     implementation 'com.gitee.cbfg5210:RVAdapter:0.3.7'
-    implementation 'com.imuxuan:floatingview:1.6'
 
     implementation project(':opensdk')
     // Replaced external dependency with local implementation

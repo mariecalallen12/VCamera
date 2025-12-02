@@ -71,7 +71,8 @@ android {
         disable "UnusedResources", 'RestrictedApi'
         disable 'TypographyFractions', 'TypographyQuotes'
         enable 'RtlHardcoded', 'RtlCompat', 'RtlEnabled'
-        check 'NewApi', 'InlinedApi'
+        // 'check' has been renamed to 'checkOnly' to make it clear it turns off all other checks
+        checkOnly 'NewApi', 'InlinedApi'
     }
 }
 

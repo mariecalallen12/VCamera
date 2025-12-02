@@ -65,7 +65,7 @@ Thay vì tìm kiếm các thư viện thay thế hoặc version khác, chúng t�
 ### 1. StateView Implementation
 
 **File:** `app/src/main/java/com/github/nukc/stateview/StateView.java`  
-**Số dòng:** 173 dòng  
+**Số dòng:** 166 dòng  
 **Chức năng:**
 - Custom View extends FrameLayout
 - Quản lý 4 trạng thái: CONTENT, LOADING, EMPTY, ERROR
@@ -129,7 +129,7 @@ loadingView.dismiss()
 ### 3. FloatingMagnetView Implementation
 
 **File:** `app/src/main/java/com/imuxuan/floatingview/FloatingMagnetView.java`  
-**Số dòng:** 156 dòng  
+**Số dòng:** 172 dòng  
 **Chức năng:**
 - Custom View extends FrameLayout
 - Hỗ trợ drag & drop
@@ -236,7 +236,7 @@ lintOptions {
 
 ### Files Đã Tạo Mới (4 files)
 
-1. **StateView.java** (173 dòng)
+1. **StateView.java** (166 dòng)
    - Package: `com.github.nukc.stateview`
    - Type: Custom View
    - Purpose: Quản lý các trạng thái UI
@@ -246,7 +246,7 @@ lintOptions {
    - Type: DialogFragment
    - Purpose: Hiển thị loading dialog
 
-3. **FloatingMagnetView.java** (156 dòng)
+3. **FloatingMagnetView.java** (172 dòng)
    - Package: `com.imuxuan.floatingview`
    - Type: Custom View
    - Purpose: Draggable floating view với magnetic behavior
@@ -267,7 +267,7 @@ lintOptions {
 2. **opensdk/build.gradle**
    - Đổi `check` thành `checkOnly` trong lintOptions
 
-### Tổng Số Dòng Code Mới: 459 dòng
+### Tổng Số Dòng Code Mới: 467 dòng
 
 ### Các Cảnh Báo Deprecation Đã Khắc Phục
 
